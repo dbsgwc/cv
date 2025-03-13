@@ -1,4 +1,4 @@
-# 在线个人简历 | Online CV
+# 在线简历 | Online CV
 
 <div align="center">
   
