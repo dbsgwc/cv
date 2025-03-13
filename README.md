@@ -30,7 +30,7 @@
 
 ## 👀 预览效果 | Preview
 
-在线预览: [https://cv.dbsgw.com](https://cv.dbsgw.com)
+在线预览: [https://cv.wat.ink](https://cv.wat.ink)
 
 <!-- 
 可以在这里添加项目截图
@@ -63,7 +63,7 @@
 ## 🚀 快速开始 | Quick Start
 
 ### 在线访问
-直接访问：[https://cv.dbsgw.com](https://cv.dbsgw.com)
+直接访问：[https://cv.wat.ink](https://cv.wat.ink)
 
 ### 本地运行
 
