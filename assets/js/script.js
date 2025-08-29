@@ -138,8 +138,8 @@ function optimizeForMobile() {
     }
 }
 
-// 页面加载效果
-window.addEventListener('load', function() {
+// 页面加载效果（更早初始化、减少首屏阻塞）
+document.addEventListener('DOMContentLoaded', function() {
     // 初始化滚动进度条
     initScrollProgress();
     
@@ -152,9 +152,9 @@ window.addEventListener('load', function() {
     // 初始化触摸交互
     initTouchInteractions();
     
-    // 隐藏加载动画
+    // 移除加载动画（已删除 loader DOM，保留 body 状态）
     setTimeout(function() {
-        pageLoader.classList.add('fade-out');
+        if (pageLoader) pageLoader.remove();
         document.body.classList.add('loaded');
         
         // 初始化动画
@@ -163,18 +163,35 @@ window.addEventListener('load', function() {
         // 初始化打字机效果
         typeWriter();
         
-        // 初始化粒子效果
-        initParticles();
+        // 延后初始化粒子效果，避免阻塞首屏渲染
+        const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const initParticlesDeferred = function() {
+            if (document.getElementById('particles-js')) {
+                if (!isMobile() && !reduceMotion) {
+                    initParticles();
+                }
+            }
+        };
+        if ('requestIdleCallback' in window) {
+            requestIdleCallback(initParticlesDeferred, { timeout: 2000 });
+        } else {
+            setTimeout(initParticlesDeferred, 800);
+        }
         
-        // 移动端优化
-        optimizeForMobile();
+        // 移动端优化（仅在移动端启用，避免重复初始化粒子）
+        if (isMobile()) {
+            optimizeForMobile();
+        }
         
-        // 初始化AOS
-        AOS.init({
-            duration: 800,
-            easing: 'ease-in-out',
-            once: true
-        });
+        // 初始化AOS（存在性判断，避免重复 init）
+        if (typeof AOS !== 'undefined' && !document.body.dataset.aosInited) {
+            AOS.init({
+                duration: 700,
+                easing: 'ease-in-out',
+                once: true
+            });
+            document.body.dataset.aosInited = 'true';
+        }
         
         // 初始化导航高亮
         highlightNavOnScroll();
@@ -182,13 +199,13 @@ window.addEventListener('load', function() {
         // 添加滚动事件监听
         window.addEventListener('scroll', function() {
             requestAnimationFrame(highlightNavOnScroll);
-        });
+        }, { passive: true });
         
         // 添加窗口大小改变事件监听
         window.addEventListener('resize', function() {
             requestAnimationFrame(highlightNavOnScroll);
         });
-    }, isMobile() ? 300 : 500); // 移动端更快的加载时间
+    }, isMobile() ? 150 : 350); // 移动端更快的加载时间
 });
 
 // 初始化粒子效果
@@ -457,7 +474,7 @@ window.addEventListener('scroll', function() {
         const scrollPercent = (scrollTop / docHeight) * 100;
         scrollProgress.style.width = scrollPercent + '%';
     }
-});
+}, { passive: true });
 
 // 移动端菜单切换
 if (mobileMenuToggle) {

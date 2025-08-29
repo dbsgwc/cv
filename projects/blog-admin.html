@@ -34,25 +34,18 @@
     
     <!-- Stylesheets -->
     <link rel="stylesheet" href="../assets/css/styles.css">
-    <link rel="stylesheet" href="../assets/css/font-awesome.min.css">
+    <link rel="preload" href="../assets/css/font-awesome.min.css" as="style">
+    <link rel="stylesheet" href="../assets/css/font-awesome.min.css" media="print" onload="this.media='all'">
     <link rel="stylesheet" href="../assets/css/poppins.css">
-    <link rel="stylesheet" href="../assets/css/aos.css">
+    
     <link rel="stylesheet" href="../assets/css/project-detail.css">
     
     <!-- Preload Critical Resources -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
     <!-- Schema.org markup for Google+ -->
 </head>
 <body>
-    <!-- 页面加载器 -->
-    <div class="page-loader">
-        <div class="loader-content">
-            <div class="loader-circle"></div>
-            <p class="loader-text">加载中...</p>
-        </div>
-    </div>
+    
 
     <!-- 项目导航栏 -->
     <nav class="project-nav">
@@ -132,22 +125,22 @@
                         <h2><i class="fas fa-images"></i> 项目展示</h2>
                         <div class="project-images-row">
                             <div class="project-image-item">
-                                <img src="../assets/images/projects/admin-home.webp" alt="后台管理系统展示" class="zoomable-image">
+                                <img src="../assets/images/projects/admin-home.webp" alt="后台管理系统展示" class="zoomable-image" loading="lazy" decoding="async" width="400" height="225">
                                 <div class="image-caption">后台首页 - 数据统计</div>
                             </div>
                             <div class="project-image-item">
-                                <img src="../assets/images/projects/admin-posts.webp" alt="文章管理展示" class="zoomable-image">
+                                <img src="../assets/images/projects/admin-posts.webp" alt="文章管理展示" class="zoomable-image" loading="lazy" decoding="async" width="400" height="225">
                                 <div class="image-caption">文章管理 - 列表页面</div>
                             </div>
                         </div>
 
                         <div class="project-images-row">
                             <div class="project-image-item">
-                                <img src="../assets/images/projects/admin-edit.webp" alt="编辑器展示" class="zoomable-image">
+                                <img src="../assets/images/projects/admin-edit.webp" alt="编辑器展示" class="zoomable-image" loading="lazy" decoding="async" width="400" height="225">
                                 <div class="image-caption">文章编辑 - Markdown编辑器</div>
                             </div>
                             <div class="project-image-item">
-                                <img src="../assets/images/projects/admin-category.webp" alt="系统设置展示" class="zoomable-image">
+                                <img src="../assets/images/projects/admin-category.webp" alt="系统设置展示" class="zoomable-image" loading="lazy" decoding="async" width="400" height="225">
                                 <div class="image-caption">系统设置 - 权限管理</div>
                             </div>
                         </div>
@@ -250,8 +243,7 @@
     </a>
 
     <!-- Scripts -->
-    <script src="../assets/js/aos.js"></script>
-    <script src="../assets/js/script.js"></script>
-    <script src="../assets/js/project-detail.js"></script>
+    <script defer src="../assets/js/script.js"></script>
+    <script defer src="../assets/js/project-detail.js"></script>
 </body>
 </html> 

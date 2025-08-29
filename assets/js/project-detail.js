@@ -109,7 +109,7 @@
                     backToTop.classList.remove('visible');
                 }
             }
-        });
+        }, { passive: true });
     }
 
     // 滚动时高亮当前导航链接
@@ -160,6 +160,6 @@
     // 优化滚动事件，添加导航高亮
     window.addEventListener('scroll', throttle(function() {
         highlightCurrentNav();
-    }, 100));
+    }, 100), { passive: true });
 
 })(); 
